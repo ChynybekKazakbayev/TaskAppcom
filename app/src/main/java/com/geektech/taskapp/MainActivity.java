@@ -1,6 +1,7 @@
 package com.geektech.taskapp;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import com.geektech.taskapp.onboard.OnBoardActivity;
@@ -33,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        boolean isShown = false;
+        SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
+        boolean isShown = preferences.getBoolean("isShown", false);
+
         if (!isShown) {
             startActivity(new Intent(this, OnBoardActivity.class));
             finish();
