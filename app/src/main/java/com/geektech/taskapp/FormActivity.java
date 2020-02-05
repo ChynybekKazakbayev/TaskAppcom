@@ -21,17 +21,19 @@ public class FormActivity extends AppCompatActivity {
         editDesc = findViewById(R.id.editDesc);
     }
 
+
     public void onClick(View view) {
         String title = editTitle.getText().toString().trim();
         String desc = editDesc.getText().toString().trim();
 
-            if (editDesc.getText().toString().matches("")){
-        Toast.makeText(getApplicationContext(),"Enter some text",Toast.LENGTH_LONG).show();
-    }
-        Intent intent = new Intent();
-        Task task = new Task(title, desc);
-        intent.putExtra("task", task);
-        setResult(RESULT_OK, intent);
-        finish();
+        if (editDesc.getText().toString().matches("")) {
+            Toast.makeText(getApplicationContext(), "Enter some text", Toast.LENGTH_LONG).show();
+        } else {
+            Intent intent = new Intent();
+            Task task = new Task(title, desc);
+            intent.putExtra("task", task);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 }

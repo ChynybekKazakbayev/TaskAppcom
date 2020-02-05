@@ -1,5 +1,6 @@
 package com.geektech.taskapp;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,8 +9,10 @@ import com.geektech.taskapp.onboard.OnBoardActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.os.Environment;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
@@ -27,6 +30,12 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
 
+import java.io.File;
+import java.io.IOException;
+
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -38,10 +47,10 @@ public class MainActivity extends AppCompatActivity {
         boolean isShown = preferences.getBoolean("isShown", false);
 
         if (!isShown) {
-            startActivity(new Intent(this, OnBoardActivity.class));
+           startActivity(new Intent(this, OnBoardActivity.class));
             finish();
             return;
-        }
+            }
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -65,6 +74,37 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+        initFile();
+    }
+
+    @AfterPermissionGranted(200)
+    private  void initFile(){
+        String[]perms = {Manifest.permission.WRITE_EXTERNAL_STORAGE};
+        if (EasyPermissions.hasPermissions(this,perms)){
+    File folder = new File(Environment.getExternalStorageDirectory(),"MyTaskApp");
+            folder.mkdirs();
+            File file = new File(folder,"note2.txt");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            EasyPermissions.requestPermissions(
+                    this,
+                    "Разрешите",
+                    200,
+                    perms);
+        }
+
+        File folder = new File(Environment.getExternalStorageDirectory(),"MyTaskApp");
+        folder.mkdir();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode,permissions,grantResults,this);
     }
 
     @Override

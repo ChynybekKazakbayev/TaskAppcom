@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +27,6 @@ import com.geektech.taskapp.R;
  */
 public class BoardFragment extends Fragment {
     Button button;
-    // public Button fr_btn;
     ImageView imageView;
 
     public BoardFragment() {
@@ -41,6 +41,7 @@ public class BoardFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_board, container, false);
          button = view.findViewById(R.id.fr_btn);
          imageView = view.findViewById(R.id.imageView);
+       // LinearLayout fra = view.findViewById(R.id.fra);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,31 +54,36 @@ public class BoardFragment extends Fragment {
             }
         });
 
-return view;
-
-
-    }
+return view; }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         TextView textView = view.findViewById(R.id.textView);
+        LinearLayout fra = view.findViewById(R.id.fra);
+
         int pos = getArguments().getInt("pos");
         switch (pos) {
-            case 0:
-                textView.setText("Привет");
-        button.setVisibility(View.INVISIBLE);
-        imageView.setImageResource(R.drawable.board_1);
-                break;
             case 1:
+                textView.setText("Привет");
+                button.setVisibility(View.INVISIBLE);
+                imageView.setImageResource(R.drawable.board_1);
+                fra.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+
+                break;
+            case 2:
                 textView.setText("Hello");
                 button.setVisibility(View.INVISIBLE);
                 imageView.setImageResource(R.drawable.board_2);
+                fra.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
                 break;
-            case 2:
+            case 3:
                 textView.setText("Салам");
                 button.setVisibility(View.VISIBLE);
                 imageView.setImageResource(R.drawable.board_3);
+                fra.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+
                 break;
         }
 
