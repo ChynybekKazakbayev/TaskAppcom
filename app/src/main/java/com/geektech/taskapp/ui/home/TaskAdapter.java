@@ -1,4 +1,4 @@
-package com.geektech.taskapp;
+package com.geektech.taskapp.ui.home;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,11 +8,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.geektech.taskapp.OnItemClickListener;
+import com.geektech.taskapp.R;
+import com.geektech.taskapp.Task;
+
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
-    List<Task> list;
+    private OnItemClickListener onItemClickListener;
+    private List<Task> list;
 
     public TaskAdapter(List<Task> list) {
         this.list = list;
@@ -33,7 +38,11 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return list.size();
+
+        return list.size(); }
+
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
+        this.onItemClickListener = onItemClickListener;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -43,6 +52,12 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                onItemClickListener.OnItemClick(getAdapterPosition());
+                }
+            });
         }
 
         public void bind(Task task) {

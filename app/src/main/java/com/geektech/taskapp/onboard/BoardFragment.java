@@ -68,21 +68,21 @@ return view; }
                 textView.setText("Привет");
                 button.setVisibility(View.INVISIBLE);
                 imageView.setImageResource(R.drawable.board_1);
-                fra.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+                fra.setBackground(getResources().getDrawable(R.drawable.act_fo));
 
                 break;
             case 2:
                 textView.setText("Hello");
                 button.setVisibility(View.INVISIBLE);
                 imageView.setImageResource(R.drawable.board_2);
-                fra.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                fra.setBackground(getResources().getDrawable(R.drawable.gradient_2));
 
                 break;
             case 3:
                 textView.setText("Салам");
                 button.setVisibility(View.VISIBLE);
                 imageView.setImageResource(R.drawable.board_3);
-                fra.setBackgroundColor(getResources().getColor(R.color.colorPrimaryDark));
+                fra.setBackground(getResources().getDrawable(R.drawable.gradient_3));
 
                 break;
         }

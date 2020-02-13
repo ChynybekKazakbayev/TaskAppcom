@@ -128,4 +128,9 @@ public class MainActivity extends AppCompatActivity {
         fragment.getChildFragmentManager().getFragments().get(0)
                 .onActivityResult(requestCode, resultCode, data);
     }
+
+    public void onClickIm(View view){
+        Intent intent = new Intent(this,ProfileActiviti.class);
+        startActivity(intent);
+    }
 }

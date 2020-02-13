@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/on_b_sini"
     tools:context=".onboard.OnBoardActivity">
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
+        android:background="@drawable/act_fo"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

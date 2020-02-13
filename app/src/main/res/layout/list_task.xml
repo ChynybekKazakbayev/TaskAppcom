@@ -12,7 +12,7 @@
         android:layout_height="70dp" />
 
     <TextView
-        android:id="@+id/desc_view"
+        android:id="@+id/textDesc"
         android:layout_width="match_parent"
         android:layout_height="61dp" />
 
