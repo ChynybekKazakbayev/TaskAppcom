@@ -11,6 +11,9 @@ public class App extends Application {
 
     private static App instance;
     private static AppDatabase database;
+
+   
+
     @Override
     public void onCreate(){
         super.onCreate();

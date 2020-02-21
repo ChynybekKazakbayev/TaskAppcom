@@ -48,20 +48,32 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         private TextView textTitle;
+        private TextView textDesc;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textTitle = itemView.findViewById(R.id.textTitle);
+            textDesc = itemView.findViewById(R.id.textDesc3);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                 onItemClickListener.OnItemClick(getAdapterPosition());
                 }
             });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    onItemClickListener.OnLongItemClick(getAdapterPosition());
+                    return true;
+                }
+            });
         }
 
         public void bind(Task task) {
             textTitle.setText(task.getTitle());
+            textDesc.setText(task.getDesc());
 
             //TODO
         }
