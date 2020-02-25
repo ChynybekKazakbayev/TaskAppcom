@@ -10,6 +10,7 @@ import com.geektech.taskapp.onboard.OnBoardActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import android.os.Environment;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -45,12 +46,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SharedPreferences preferences = getSharedPreferences("settings", MODE_PRIVATE);
         boolean isShown = preferences.getBoolean("isShown", false);
-//
-//        if (!isShown) {
-//           startActivity(new Intent(this, OnBoardActivity.class));
-//            finish();
-//            return;
-//            }
+
+        if (!isShown) {
+           startActivity(new Intent(this, OnBoardActivity.class));
+            finish();
+            return;
+            }
         if (FirebaseAuth.getInstance().getCurrentUser() == null) {
             startActivity(new Intent(this, PhoneActivity.class));
             finish();
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationView navigationView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow,
                 R.id.nav_tools, R.id.nav_share, R.id.nav_send)
@@ -79,8 +81,23 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+        View header = navigationView.getHeaderView(0);
+        header.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Main2Activity.class));
+            }
+        });
+
         initFile();
     }
+
+//    public void onClickIm(View view){
+//        Intent intent = new Intent(this, ProfileActivity.class);
+//        startActivity(intent);
+//    }
 
     @AfterPermissionGranted(200)
     private  void initFile(){
@@ -132,10 +149,5 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         fragment.getChildFragmentManager().getFragments().get(0)
                 .onActivityResult(requestCode, resultCode, data);
-    }
-
-    public void onClickIm(View view){
-        Intent intent = new Intent(this, ProfileActivity.class);
-        startActivity(intent);
     }
 }

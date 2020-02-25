@@ -38,7 +38,9 @@ public class OnBoardActivity extends AppCompatActivity {
         preferences.edit().putBoolean("isShown",true).apply();
         startActivity(new Intent(OnBoardActivity.this, MainActivity.class));
         finish();
+
         return view;
+
     }
 
 }
