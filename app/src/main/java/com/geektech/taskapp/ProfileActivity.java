@@ -41,7 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void onClick(View view) {
-        String name = editName.getText().toString().trim();
+        String  name = editName.getText().toString().trim();
 
         Map<String,Object> map = new HashMap <>();
         map.put("name",name);
